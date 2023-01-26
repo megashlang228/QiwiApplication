@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <navigation android:id="@+id/navigation_home"
+        app:startDestination="@id/fragment_home">
+        <fragment
+            android:id="@+id/fragment_home"
+            android:name="com.example.qiwiapplication.ui.home.HomeFragment"
+            android:label="@string/title_home"
+            tools:layout="@layout/fragment_home" />
+    </navigation>
+    <navigation android:id="@+id/navigation_history"
+        app:startDestination="@id/fragment_history">
+        <fragment
+            android:id="@+id/fragment_history"
+            android:name="com.example.qiwiapplication.ui.dashboard.DashboardFragment"
+            android:label="@string/title_dashboard"
+            tools:layout="@layout/fragment_dashboard" />
+    </navigation>
+    <navigation android:id="@+id/navigation_profile"
+        app:startDestination="@id/fragment_profile">
+        <fragment
+            android:id="@+id/fragment_profile"
+            android:name="com.example.qiwiapplication.ui.notifications.ProfileFragment"
+            android:label="@string/title_notifications"
+            tools:layout="@layout/fragment_profile" />
+    </navigation>
+</navigation>
