@@ -17,12 +17,19 @@
         android:theme="@style/Theme.QiwiApplication"
         tools:targetApi="31">
 
+        <service
+            android:name=".notification.PushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/SplashScreen"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,9 +40,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/qiwi" />
     </application>
 
 </manifest>

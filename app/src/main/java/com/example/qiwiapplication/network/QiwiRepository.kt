@@ -10,6 +10,7 @@ import com.example.qiwiapplication.network.paging.PaymentPageLoader
 import com.example.qiwiapplication.network.paging.PaymentsPagingSource
 import com.example.qiwiapplication.network.response.PaymentsResponse
 import com.example.qiwiapplication.network.response.balanceresponse.BalanceResponse
+import com.example.qiwiapplication.network.response.hookresponse.HookResponse
 import com.example.qiwiapplication.network.response.rersoninforesponse.PersonInfoResponse
 import com.example.qiwiapplication.utils.SharedPref
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +62,19 @@ class QiwiRepository {
         val token = SharedPref.getToken()
 
         val request = NetworkLayer.apiClient.getPersonInfo(wallet,"Bearer " + token)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body
+    }
+
+    suspend fun subscribeHooks(): HookResponse? {
+        val wallet = SharedPref.getPersonId()
+        val token = SharedPref.getToken()
+
+        val request = NetworkLayer.apiClient.subscribeHooks(wallet,"Bearer " + token)
 
         if (request.failed || !request.isSuccessful) {
             return null

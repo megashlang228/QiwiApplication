@@ -3,6 +3,7 @@ package com.example.qiwiapplication.network
 import android.util.Log
 import com.example.qiwiapplication.network.response.PaymentsResponse
 import com.example.qiwiapplication.network.response.balanceresponse.BalanceResponse
+import com.example.qiwiapplication.network.response.hookresponse.HookResponse
 import com.example.qiwiapplication.network.response.rersoninforesponse.PersonInfoResponse
 import retrofit2.Response
 
@@ -24,6 +25,10 @@ class ApiClient (
 
     suspend fun getBalance(personId: String, token: String): SimpleResponse<BalanceResponse> {
         return safeApiCall { qiwiService.getBalance(personId, token) }
+    }
+
+    suspend fun subscribeHooks(personId: String, token: String): SimpleResponse<HookResponse> {
+        return safeApiCall { qiwiService.subscribeHooks(personId, token) }
     }
 
 

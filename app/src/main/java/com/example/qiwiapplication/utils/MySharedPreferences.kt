@@ -20,6 +20,30 @@ object SharedPref{
         return sharedPref.contains(PREF_TOKEN)
     }
 
+    fun saveTokenPhone(token: String){
+        put(PREF_TOKEN_PHONE, token)
+    }
+
+    fun getTokenPhone(): String {
+        return get(PREF_TOKEN_PHONE, String::class.java)
+    }
+
+    fun containsTokenPhone(): Boolean{
+        return sharedPref.contains(PREF_TOKEN_PHONE)
+    }
+
+    fun setIsSubscribeNotification(param: Boolean){
+        put(PREF_SUBSCRIBE_NOTIFICATION, Boolean)
+    }
+
+    fun isSubscribeNotification(): Boolean {
+        return get(PREF_SUBSCRIBE_NOTIFICATION, Boolean::class.java)
+    }
+
+    fun containsIsSubscribeNotification(): Boolean{
+        return sharedPref.contains(PREF_SUBSCRIBE_NOTIFICATION)
+    }
+
     fun savePersonId(personId: String){
         put(PREF_PERSON_ID, personId)
     }

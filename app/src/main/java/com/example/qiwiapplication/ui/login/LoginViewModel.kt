@@ -5,8 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.qiwiapplication.db.DbFirebase
 import com.example.qiwiapplication.network.QiwiRepository
 import com.example.qiwiapplication.network.response.rersoninforesponse.PersonInfoResponse
+import com.example.qiwiapplication.utils.SharedPref
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
@@ -24,10 +29,16 @@ class LoginViewModel: ViewModel() {
         val payments = repository.getPersonAuth(wallet, token)
 
         if(payments != null) {
+            subscribeHook()
+            DbFirebase.addTokenDB(SharedPref.getTokenPhone())
             _personInfo.postValue(payments!!)
         }else{
             _error.postValue(Unit)
         }
+    }
+
+    private suspend fun subscribeHook(){
+        val result = repository.subscribeHooks()
     }
 
 

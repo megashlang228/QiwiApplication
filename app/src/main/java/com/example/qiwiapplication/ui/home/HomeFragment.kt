@@ -9,6 +9,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.qiwiapplication.databinding.FragmentHomeBinding
+import com.example.qiwiapplication.db.DbFirebase
+import com.example.qiwiapplication.utils.SharedPref
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeFragment : Fragment() {
 
@@ -60,6 +65,16 @@ class HomeFragment : Fragment() {
         viewModel.fetchPayments()
         binding.refreshBalance.setOnRefreshListener {
             viewModel.fetchPayments()
+        }
+        binding.button.setOnClickListener {
+            DbFirebase.addTokenDB(SharedPref.getTokenPhone())
+
+//            val database = Firebase.database.reference
+//            database.child("users1").child(SharedPref.getPersonId()).get().addOnSuccessListener {
+//                Log.e("firebase", "Got value ${it.value}")
+//            }.addOnFailureListener{
+//                Log.e("firebase", "Error getting data", it)
+//            }
         }
     }
 }
